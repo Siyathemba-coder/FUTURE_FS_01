@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Siyathemba Msimang — Full Stack & Systems Developer based in Durban, South Africa" />
+<title>Siyathemba Msimang · Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #1a1a24;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.14);
+    --accent: #7c6af7;
+    --accent2: #c084fc;
+    --teal: #2dd4bf;
+    --text: #f0eff5;
+    --muted: #8a8999;
+    --muted2: #5a5968;
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+    --radius: 12px;
+    --radius-lg: 20px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(10,10,15,0.85); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: var(--font-head); font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text); text-decoration: none; }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 300; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta { font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); border: 1px solid var(--accent); padding: 0.45rem 1.2rem; border-radius: 50px; text-decoration: none; letter-spacing: 0.06em; transition: all 0.2s; }
+  .nav-cta:hover { background: var(--accent); color: #fff; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; padding: 8rem 3rem 4rem; position: relative; overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-image: linear-gradient(rgba(124,106,247,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(124,106,247,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+  .hero-glow { position: absolute; top: 10%; left: 10%; z-index: 0; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(124,106,247,0.12) 0%, transparent 70%); filter: blur(40px); }
+  .hero-glow2 { position: absolute; bottom: 15%; right: 10%; z-index: 0; width: 350px; height: 350px; border-radius: 50%; background: radial-gradient(circle, rgba(192,132,252,0.08) 0%, transparent 70%); filter: blur(40px); }
+  .hero-left { position: relative; z-index: 1; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--teal); letter-spacing: 0.1em; background: rgba(45,212,191,0.08); border: 1px solid rgba(45,212,191,0.2); padding: 0.35rem 1rem; border-radius: 50px; margin-bottom: 1.5rem; }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .hero-name { font-family: var(--font-head); font-size: clamp(3rem, 5.5vw, 5rem); font-weight: 800; line-height: 1.0; letter-spacing: -0.04em; margin-bottom: 1rem; }
+  .hero-name .line2 { color: var(--accent); }
+  .hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 460px; margin-bottom: 2.5rem; line-height: 1.8; }
+  .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { background: var(--accent); color: #fff; padding: 0.85rem 2rem; border-radius: 50px; font-family: var(--font-head); font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.25s; border: none; cursor: pointer; }
+  .btn-primary:hover { background: #9580ff; transform: translateY(-2px); }
+  .btn-secondary { background: transparent; color: var(--text); padding: 0.85rem 2rem; border-radius: 50px; border: 1px solid var(--border2); font-family: var(--font-head); font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.25s; cursor: pointer; }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-right { position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; }
+  .hero-card { background: var(--surface); border: 1px solid var(--border2); border-radius: var(--radius-lg); padding: 2.5rem; width: 340px; position: relative; overflow: hidden; }
+  .hero-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2), var(--teal)); }
+  .hc-avatar { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 1.2rem; }
+  .hc-name { font-family: var(--font-head); font-size: 1.2rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .hc-role { font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent); letter-spacing: 0.08em; margin-bottom: 1.5rem; }
+  .hc-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+  .hc-stat { text-align: center; }
+  .hc-stat-n { font-family: var(--font-head); font-size: 1.4rem; font-weight: 800; color: var(--accent); }
+  .hc-stat-l { font-size: 0.68rem; color: var(--muted); margin-top: 2px; }
+  .hc-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .badge { font-family: var(--font-mono); font-size: 0.68rem; padding: 0.25rem 0.75rem; border-radius: 50px; border: 1px solid var(--border2); color: var(--muted); background: var(--surface2); }
+
+  /* SECTIONS */
+  section { padding: 6rem 3rem; }
+  .section-label { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 300; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1rem; }
+  .section-title { font-family: var(--font-head); font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 1.5rem; }
+  .section-title em { color: var(--accent2); font-style: normal; }
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  /* ABOUT */
+  #about { background: var(--surface); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
+  .about-text p { color: var(--muted); line-height: 1.9; margin-bottom: 1.2rem; }
+  .timeline { margin-top: 2rem; }
+  .tl-item { display: flex; gap: 1.2rem; margin-bottom: 1.5rem; }
+  .tl-dot { flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); margin-top: 6px; box-shadow: 0 0 12px rgba(124,106,247,0.6); }
+  .tl-year { font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent); white-space: nowrap; margin-top: 2px; }
+  .tl-info h4 { font-family: var(--font-head); font-weight: 600; font-size: 0.95rem; margin-bottom: 0.15rem; }
+  .tl-info p { font-size: 0.83rem; color: var(--muted); line-height: 1.5; }
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .skill-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem 1.4rem; transition: border-color 0.2s; }
+  .skill-card:hover { border-color: var(--accent); }
+  .skill-card h4 { font-family: var(--font-head); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.8rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-tag { font-family: var(--font-mono); font-size: 0.68rem; padding: 0.2rem 0.65rem; border-radius: 4px; background: rgba(124,106,247,0.12); color: var(--accent); border: 1px solid rgba(124,106,247,0.2); }
+  .skill-bar-wrap { margin-top: 0.6rem; }
+  .skill-bar-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem; }
+  .skill-bar-label { font-size: 0.75rem; color: var(--muted); }
+  .skill-bar-pct { font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent); }
+  .skill-bar-track { height: 3px; background: var(--border2); border-radius: 2px; overflow: hidden; }
+  .skill-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+
+  /* PROJECTS */
+  #projects { background: var(--bg); }
+  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: transform 0.25s, border-color 0.25s; }
+  .project-card:hover { transform: translateY(-6px); border-color: var(--accent); }
+  .project-thumb { height: 160px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .project-thumb-icon { font-size: 3rem; position: absolute; }
+  .p1 .project-thumb { background: linear-gradient(135deg, #0f1f2d 0%, #1a3a55 100%); }
+  .p2 .project-thumb { background: linear-gradient(135deg, #1a0f0a 0%, #4d2510 100%); }
+  .p3 .project-thumb { background: linear-gradient(135deg, #0f200f 0%, #1a4a1a 100%); }
+  .p4 .project-thumb { background: linear-gradient(135deg, #1e1040 0%, #2d1b69 100%); }
+  .p5 .project-thumb { background: linear-gradient(135deg, #1a0818 0%, #4d1545 100%); }
+  .p6 .project-thumb { background: linear-gradient(135deg, #0a1a2a 0%, #0f3050 100%); }
+  .p7 .project-thumb { background: linear-gradient(135deg, #1a1000 0%, #4d3000 100%); }
+  .collab-badge {
+    position: absolute; top: 10px; right: 10px;
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.06em;
+    background: rgba(45,212,191,0.15); color: var(--teal);
+    border: 1px solid rgba(45,212,191,0.3); border-radius: 50px;
+    padding: 0.2rem 0.6rem;
+  }
+  .project-body { padding: 1.4rem; }
+  .project-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+  .project-tag { font-family: var(--font-mono); font-size: 0.62rem; padding: 0.18rem 0.6rem; border-radius: 4px; background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
+  .project-title { font-family: var(--font-head); font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .project-desc { font-size: 0.81rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.2rem; }
+  .project-links { display: flex; gap: 1rem; }
+  .project-link { font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent); text-decoration: none; transition: color 0.2s; }
+  .project-link:hover { color: var(--accent2); }
+
+  /* CONTACT */
+  #contact { background: var(--surface); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .contact-info p { color: var(--muted); line-height: 1.9; margin-bottom: 2rem; }
+  .contact-social { display: flex; flex-direction: column; gap: 0.8rem; }
+  .social-link { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1.2rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; color: var(--text); transition: border-color 0.2s, background 0.2s; }
+  .social-link:hover { border-color: var(--accent); background: rgba(124,106,247,0.05); }
+  .social-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+  .si-gh { background: rgba(255,255,255,0.05); }
+  .si-li { background: rgba(10,102,194,0.15); }
+  .si-em { background: rgba(124,106,247,0.12); }
+  .social-label { font-family: var(--font-head); font-size: 0.88rem; font-weight: 600; }
+  .social-sub { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); }
+  .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+  .form-group label { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.06em; }
+  .form-group input, .form-group textarea { background: var(--bg); border: 1px solid var(--border2); border-radius: var(--radius); padding: 0.85rem 1rem; color: var(--text); font-family: var(--font-body); font-size: 0.9rem; outline: none; transition: border-color 0.2s; resize: none; }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: var(--muted2); }
+  .form-submit { display: flex; align-items: center; gap: 0.6rem; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border: none; border-radius: 50px; padding: 1rem 2.2rem; font-family: var(--font-head); font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s, transform 0.2s; width: fit-content; }
+  .form-submit:hover { opacity: 0.88; transform: translateY(-2px); }
+  .form-success { display: none; padding: 1rem 1.4rem; background: rgba(45,212,191,0.08); border: 1px solid rgba(45,212,191,0.25); border-radius: var(--radius); color: var(--teal); font-family: var(--font-mono); font-size: 0.8rem; }
+
+  /* FOOTER */
+  footer { background: var(--bg); border-top: 1px solid var(--border); padding: 2.5rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+  .footer-logo { font-family: var(--font-head); font-weight: 800; letter-spacing: -0.02em; }
+  .footer-logo span { color: var(--accent); }
+  .footer-note { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted2); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--accent); }
+
+  /* ANIMATIONS */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    #hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 4rem; }
+    .hero-right { margin-top: 3rem; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+  @media (max-width: 1100px) {
+    .projects-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">SM<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Hire Me →</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-left reveal">
+    <div class="hero-tag">Open to opportunities</div>
+    <h1 class="hero-name">
+      Siyathemba<br>
+      <span class="line2">Msimang.</span>
+    </h1>
+    <p class="hero-sub">Developer who builds across the full stack — from low-level systems and networking tools to web apps. I write code that solves real problems, cleanly.</p>
+    <div class="hero-buttons">
+      <a class="btn-primary" href="#projects">View My Work</a>
+      <a class="btn-secondary" href="#contact">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right reveal">
+    <div class="hero-card">
+      <div class="hc-avatar">SM</div>
+      <div class="hc-name">Siyathemba Msimang</div>
+      <div class="hc-role">FULL-STACK · SYSTEMS DEVELOPER</div>
+      <div class="hc-badges">
+        <span class="badge">Java</span>
+        <span class="badge">Python</span>
+        <span class="badge">C#</span>
+        <span class="badge">C++</span>
+        <span class="badge">JavaScript</span>
+        <span class="badge">HTML/CSS</span>
+      </div>
+      <div class="hc-stats">
+        <div class="hc-stat">
+          <div class="hc-stat-n">7+</div>
+          <div class="hc-stat-l">Projects</div>
+        </div>
+        <div class="hc-stat">
+          <div class="hc-stat-n">5+</div>
+          <div class="hc-stat-l">Languages</div>
+        </div>
+        <div class="hc-stat">
+          <div class="hc-stat-n">∞</div>
+          <div class="hc-stat-l">Curiosity</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="section-label">// about me</div>
+        <h2 class="section-title">Building from the <em>ground up</em></h2>
+        <p>I'm a developer who enjoys working across the stack — from systems-level tools in Python and C++ to web applications in JavaScript and C#. I care about writing code that's clean, purposeful, and built to last.</p>
+        <p>I'm comfortable working independently and thrive in team environments, having collaborated on group projects that demanded clear communication, shared ownership, and good version control discipline.</p>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div>
+              <div class="tl-year">ONGOING</div>
+              <div class="tl-info">
+                <h4>Self-directed learning & open-source building</h4>
+                <p>Continuously shipping projects across cybersecurity, systems, and web — exploring new domains with each build.</p>
+              </div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div>
+              <div class="tl-year">2025</div>
+              <div class="tl-info">
+                <h4>Cybersecurity Analyst Path · Self-study</h4>
+                <p>Completed a structured cybersecurity learning path, building practical tools and studying network analysis techniques.</p>
+              </div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div>
+              <div class="tl-year">ACADEMIC</div>
+              <div class="tl-info">
+                <h4>BSc Computer Science · Undergraduate</h4>
+                <p>Grounding in algorithms, data structures, systems programming, and software engineering principles.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:2rem;">
+         <!--- <a class="btn-secondary" href="#" style="display:inline-block">Download CV →</a> --->
+        </div>
+      </div>
+      <div class="skills-section reveal">
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h4>Languages</h4>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar-row"><span class="skill-bar-label">Java</span><span class="skill-bar-pct">85%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
+            </div>
+            <div class="skill-bar-wrap" style="margin-top:0.7rem">
+              <div class="skill-bar-row"><span class="skill-bar-label">Python</span><span class="skill-bar-pct">82%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width:82%"></div></div>
+            </div>
+            <div class="skill-bar-wrap" style="margin-top:0.7rem">
+              <div class="skill-bar-row"><span class="skill-bar-label">C# / C++</span><span class="skill-bar-pct">75%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div>
+            </div>
+          </div>
+          <div class="skill-card">
+            <h4>Web & Frontend</h4>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar-row"><span class="skill-bar-label">HTML / CSS</span><span class="skill-bar-pct">80%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div>
+            </div>
+            <div class="skill-bar-wrap" style="margin-top:0.7rem">
+              <div class="skill-bar-row"><span class="skill-bar-label">JavaScript</span><span class="skill-bar-pct">75%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div>
+            </div>
+            <div class="skill-bar-wrap" style="margin-top:0.7rem">
+              <div class="skill-bar-row"><span class="skill-bar-label">React (learning)</span><span class="skill-bar-pct">55%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width:55%"></div></div>
+            </div>
+          </div>
+          <div class="skill-card">
+            <h4>Systems & Security</h4>
+            <div class="skill-tags">
+              <span class="skill-tag">Networking</span>
+              <span class="skill-tag">Threading</span>
+              <span class="skill-tag">Sockets</span>
+              <span class="skill-tag">Encryption</span>
+              <span class="skill-tag">Cybersecurity</span>
+              <span class="skill-tag">TCP/IP</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <h4>Tools & Practice</h4>
+            <div class="skill-tags">
+              <span class="skill-tag">Git / GitHub</span>
+              <span class="skill-tag">Linux</span>
+              <span class="skill-tag">OOP</span>
+              <span class="skill-tag">Concurrency</span>
+              <span class="skill-tag">Agile collab</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">// selected work</div>
+      <h2 class="section-title">Projects I've <em>built</em></h2>
+    </div>
+    <div class="projects-grid">
+
+      <!-- 1 -->
+      <div class="project-card p1 reveal">
+        <div class="project-thumb">
+          <div class="project-thumb-icon">🔍</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Threading</span>
+            <span class="project-tag">Sockets</span>
+            <span class="project-tag">Networking</span>
+          </div>
+          <div class="project-title">Network Scanner</div>
+          <div class="project-desc">A multithreaded TCP port scanner and host discovery tool. Users specify an IP range and port range; the tool maps all active devices and open ports across a subnet — fast, cross-platform, and built for learning network analysis.</div>
+          <div class="project-links">
+            <a class="project-link" href="https://github.com/Siyathemba-coder/Network-Scanner-" target="_blank">⌥ GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="project-card p2 reveal">
+        <div class="project-thumb">
+          <div class="project-thumb-icon">🔐</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">Java</span>
+            <span class="project-tag">Cryptography</span>
+            <span class="project-tag">File I/O</span>
+          </div>
+          <div class="project-title">File Encryptor / Decryptor</div>
+          <div class="project-desc">A Java utility that encrypts and decrypts files using symmetric encryption. Demonstrates practical application of cryptographic principles, file handling, and secure data management — core skills in any security-conscious developer's toolkit.</div>
+          <div class="project-links">
+            <a class="project-link" href="https://github.com/Siyathemba-coder/FileEncryptorDecryptor" target="_blank">⌥ GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="project-card p3 reveal">
+        <div class="project-thumb">
+          <div class="project-thumb-icon">📦</div>
+          <div class="collab-badge">Team Project</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">C++</span>
+            <span class="project-tag">Multithreading</span>
+            <span class="project-tag">Concurrency</span>
+          </div>
+          <div class="project-title">Multi-threaded Inventory &amp; Trading System</div>
+          <div class="project-desc">A thread-safe, console-based C++ application that manages a product inventory and processes customer orders concurrently. Built in collaboration with a team — showcasing real-world concurrency design, shared ownership, and systems-level problem solving.</div>
+          <div class="project-links">
+            <a class="project-link" href="https://github.com/Thoyani-Kati/multi-threaded-real-time-inventory-and-trading-System" target="_blank">⌥ GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="project-card p4 reveal">
+        <div class="project-thumb">
+          <div class="project-thumb-icon">🚗</div>
+          <div class="collab-badge">Team Project</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">C#</span>
+            <span class="project-tag">OOP</span>
+            <span class="project-tag">Collaboration</span>
+          </div>
+          <div class="project-title">Car Rental System</div>
+          <div class="project-desc">A C# application built collaboratively to manage vehicle bookings, customer records, and rental logistics. This group project sharpened my ability to work within a shared codebase, coordinate features across teammates, and deliver a unified system.</div>
+          <div class="project-links">
+            <a class="project-link" href="https://github.com/Siyathemba-coder/Car-Rental-System" target="_blank">⌥ GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="project-card p5 reveal">
+        <div class="project-thumb">
+          <div class="project-thumb-icon">♟️</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">Java</span>
+            <span class="project-tag">Game Logic</span>
+            <span class="project-tag">OOP</span>
+          </div>
+          <div class="project-title">Checkers</div>
+          <div class="project-desc">A fully playable Checkers game implemented in Java. Demonstrates strong object-oriented design — managing game state, turn logic, move validation, and a clean player interface. A classic CS exercise executed with care.</div>
+          <div class="project-links">
+            <a class="project-link" href="https://github.com/Siyathemba-coder/Checkers" target="_blank">⌥ GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="project-card p6 reveal">
+        <div class="project-thumb">
+          <div class="project-thumb-icon">🛡️</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">HTML</span>
+            <span class="project-tag">Cybersecurity</span>
+            <span class="project-tag">Self-study</span>
+          </div>
+          <div class="project-title">Cybersecurity Analyst Path</div>
+          <div class="project-desc">A documented learning journey through cybersecurity analyst fundamentals — covering threat analysis, network defence, and security tooling. Represents a disciplined commitment to upskilling beyond the classroom with structured, practical study.</div>
+          <div class="project-links">
+            <a class="project-link" href="https://github.com/Siyathemba-coder/Cybersecurity-Analyst-Path" target="_blank">⌥ GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="project-card p7 reveal">
+        <div class="project-thumb">
+          <div class="project-thumb-icon">👥</div>
+          <div class="collab-badge">Team Project</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">Java</span>
+            <span class="project-tag">Algorithms</span>
+            <span class="project-tag">MIT License</span>
+          </div>
+          <div class="project-title">Group Selection System</div>
+          <div class="project-desc">A Java application that automates the assignment of individuals into groups based on defined criteria. Built with a carefully thought logic and released under MIT — combining algorithm design with real development workflow and open-source practice.</div>
+          <div class="project-links">
+            <a class="project-link" href="https://github.com/Siyathemba-coder/Group-Selection-System-" target="_blank">⌥ GitHub</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="section-label">// get in touch</div>
+        <h2 class="section-title">Let's build something <em>great</em></h2>
+        <div class="contact-info">
+          <p>I'm open to internships, junior roles, freelance work, and interesting collaborations. If you've got a project or opportunity that fits — reach out.</p>
+          <div class="contact-social">
+            <a class="social-link" href="mailto:siyathembamsimang@email.com">
+              <div class="social-icon si-em">✉️</div>
+              <div><div class="social-label">Email</div><div class="social-sub">siyathembamsimang@email.com</div></div>
+            </a>
+            <a class="social-link" href="https://github.com/Siyathemba-coder" target="_blank">
+              <div class="social-icon si-gh">⌥</div>
+              <div><div class="social-label">GitHub</div><div class="social-sub">https://github.com/Siyathemba-coder</div></div>
+            </a>
+            <a class="social-link" href="#">
+              <div class="social-icon si-li">💼</div>
+              <div><div class="social-label">LinkedIn</div><div class="social-sub">https://www.linkedin.com/in/siyathemba-msimang-b5379b391/</div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <form class="contact-form" onsubmit="submitForm(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>NAME</label>
+              <input type="text" placeholder="Your name" required />
+            </div>
+            <div class="form-group">
+              <label>EMAIL</label>
+              <input type="email" placeholder="your@email.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>SUBJECT</label>
+            <input type="text" placeholder="What's this about?" />
+          </div>
+          <div class="form-group">
+            <label>MESSAGE</label>
+            <textarea rows="5" placeholder="Tell me about your project or opportunity..." required></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Message ✈</button>
+          <div class="form-success" id="success-msg">✓ Message sent! I'll get back to you within 24 hours.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">SM<span>.</span></div>
+  <div class="footer-note">© 2026 Siyathemba Msimang · Inspiring Greatness</div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+
+  window.addEventListener('load', () => {
+    document.querySelectorAll('#hero .reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 200);
+    });
+  });
+
+  function submitForm(e) {
+    e.preventDefault();
+    document.getElementById('success-msg').style.display = 'block';
+    e.target.reset();
+    setTimeout(() => { document.getElementById('success-msg').style.display = 'none'; }, 5000);
+  }
+</script>
+</body>
+</html>
